@@ -55,7 +55,7 @@ class Config {
   // according to the configured http rule (see
   // https://github.com/googleapis/googleapis/blob/master/google/api/http.proto
   // for more details).
-  MethodCallInfo GetMethodCallInfo(const std::string &http_method,
+  MethodCallInfo GetMethodCalInfo(const std::string &http_method,
                                    const std::string &url,
                                    const std::string &query_params) const;
 
