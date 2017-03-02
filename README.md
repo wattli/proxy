@@ -1,33 +1,19 @@
 # Istio Proxy
 
-The Istio Proxy is a microservice proxy that can be used on the client and server side, and forms a microservice mesh. The Proxy supports a large number of features.
+This is server side branch, and client side branch is located at bug_131. 
 
-Client Side Features:
+Here is the step to run the end2end test, refer
+https://screenshot.googleplex.com/sBJyhhV4Hqd to run mixer and app.
 
-- *Discovery & Load Balancing*. The Proxy can use several standard service discovery and load balancing APIs to efficiently distribute traffic to services.
+And bazel build //src/envoy/mixer:envoy to build envoy at both server/client
+sides.
 
-- *Credential Injection*. The Proxy can inject client identity, either through connection tunneling or protocol-specific mechanisms such as JWT tokens for HTTP requests.
+/bin/bash src/envoy/mixer/start_envoy -l debug to run envoy at both
+server/client side (of course with different setup). 
 
-- *Connection Management*. The Proxy manages connections to services, handling health checking, retry, failover, and flow control.
+From another tap, just 
+curl http://localhost:9010/echo -d "hello world"
 
-- *Monitoring & Logging*. The Proxy can report client-side metrics and logs to the Mixer.
+and you will see the work flow.
 
-Server Side Features:
 
-- *Rate Limiting & Flow Control*. The Proxy can prevent overload of backend systems and provide client-aware rate limiting.
-
-- *Protocol Translation*. The Proxy is a gRPC gateway, providing translation between JSON-REST and gRPC.
-
-- *Authentication & Authorization*. The Proxy supports multiple authentication mechanisms, and can use the client identities to perform authorization checks through the Mixer.
-
-- *Monitoring & Logging*. The Proxy can report server-side metrics and logs to the Mixer.
-
-To learn more...
-
-- User guide coming soon!
-- [Contributing to the project](./CONTRIBUTING.md)
-
-### Filing issues
-
-If you have a question about an Istio proxy or have a problem using one, please
-[file an issue](https://github.com/istio/proxy/issues/new).
