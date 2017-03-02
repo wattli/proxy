@@ -113,6 +113,12 @@
       {
         "name": "service1",
         "connect_timeout_ms": 5000,
+        "ssl_context": {
+          "alpn_protocols": "http/1.1",
+          "cert_chain_file": "client.cert.pem",
+          "private_key_file": "client.key.pem",
+          "ca_cert_file": "server-ca.cert.pem"
+        },
         "type": "strict_dns",
         "lb_type": "round_robin",
         "hosts": [
