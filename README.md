@@ -16,4 +16,9 @@ curl http://localhost:9010/echo -d "hello world"
 
 and you will see the work flow.
 
+And if you want curl to talk to server side directly with mTLS, do this in
+client side directory (which has the proper key and cert).
+
+curl --cert client.cert.pem --key client.key.pem -v --cacert server-ca.cert.pem
+https://localhost:9090/echo -d "wattllii"
 
