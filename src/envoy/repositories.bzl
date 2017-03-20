@@ -577,8 +577,6 @@ def envoy_repositories(bind=True):
     BUILD = """
 load("@protobuf_git//:protobuf.bzl", "cc_proto_library")
 
-exports_files(["source/precompiled/precompiled.h"])
-
 package(default_visibility = ["//visibility:public"])
 
 genrule(
@@ -649,7 +647,7 @@ cc_library(
     ],
     copts = [
         "-I./external/envoy_git/source",
-        "-include ./external/envoy_git/source/precompiled/precompiled.h",
+        "-I./external/envoy_git/source/precompiled:precompiled_includes",
     ],
     includes = [
          "include",
@@ -684,7 +682,7 @@ cc_library(
     ],
     copts = [
         "-I./external/envoy_git/source",
-        "-include ./external/envoy_git/source/precompiled/precompiled.h",
+        "-I./external/envoy_git/source/precompiled:precompiled_includes",
     ],
     deps = [
         ":envoy-common",
@@ -699,7 +697,7 @@ cc_binary(
     ],
     copts = [
         "-I./external/envoy_git/source",
-        "-include ./external/envoy_git/source/precompiled/precompiled.h",
+        "-I./external/envoy_git/source/precompiled:precompiled_includes",
     ],
     deps = [
         ":envoy-common",
@@ -715,7 +713,7 @@ cc_library(
     ]),
     copts = [
         "-I./external/envoy_git/source",
-        "-include ./external/envoy_git/test/precompiled/precompiled_test.h",
+        "-I./external/envoy_git/test/precompiled:precompiled_includes",
     ],
     includes = [
         "include",
@@ -752,6 +750,6 @@ cc_test(
     native.new_git_repository(
         name = "envoy_git",
         remote = "https://github.com/lyft/envoy.git",
-        commit = "70e5d651b55d356770529e5bee9c6b2707d9cf21", # 3/1/2017
+        commit = "a3a8775d3739bb5d8bd4c75f9ca05eab97a8e048", # 3/20/2017
         build_file_content = BUILD,
     )

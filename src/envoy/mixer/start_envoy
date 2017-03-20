@@ -29,8 +29,8 @@ usage: ${BASH_SOURCE[0]} [options ...]"
     -c ... envoy config file path
     -e ... envoy binary path
     -l ... debug level
+    -la ... listening address
     -m ... mixer server address
-    -p ... listening port
     -t ... envoy config template file path
 EOF
   exit 2
@@ -41,24 +41,24 @@ TEMPLATE="$ROOT/src/envoy/mixer/envoy.conf.template"
 CONFIG="$ROOT/src/envoy/mixer/envoy.conf"
 DEBUG=''
 
-PORT='9090'
+ADDRESS='tcp://0.0.0.0:9090'
 MIXER_SERVER='localhost:9091'
 BACKEND='localhost:8080'
 
-while getopts :a:c:e:l:m:p:t: arg; do
+while getopts :a:c:e:l:la:m:t: arg; do
   case ${arg} in
     a) BACKEND="${OPTARG}";;
     c) CONFIG="${OPTARG}";;
     e) ENVOY="${OPTARG}";;
     l) DEBUG="-l ${OPTARG}";;
+    la) ADDRESS="${OPTARG}";;
     m) MIXER_SERVER="${OPTARG}";;
-    p) PORT="${OPTARG}";;
     t) TEMPLATE="${OPTARG}";;
     *) usage "Invalid option: -${OPTARG}";;
   esac
 done
 
-sed -e "s|\${PORT}|${PORT}|g" \
+sed -e "s|\${ADDRESS}|${ADDRESS}|g" \
     -e "s|\${BACKEND}|${BACKEND}|g" \
     -e "s|\${MIXER_SERVER}|${MIXER_SERVER}|g" \
     "${TEMPLATE}" > "${CONFIG}"
