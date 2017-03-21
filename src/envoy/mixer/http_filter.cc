@@ -277,13 +277,13 @@ class Instance : public Http::StreamDecoderFilter,
     Log().debug("Called Mixer::Instance : check complete {}",
                 status.ToString());
 
-/*    if (!status.ok() && state_ != Responded) {
+    if (!status.ok() && state_ != Responded) {
       state_ = Responded;
       check_status_code_ = HttpCode(status.error_code());
       Utility::sendLocalReply(*decoder_callbacks_, Code(check_status_code_),
                               status.ToString());
       return;
-    }*/
+    }
 
     state_ = Complete;
     if (!initiating_call_) {
