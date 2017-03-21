@@ -750,8 +750,8 @@ cc_test(
 
     native.new_git_repository(
         name = "envoy_git",
-        remote = "https://github.com/lyft/envoy.git",
-        commit = "b72309da41fba0c1222a72262b83bedc7294df65", # Mar 13 2017
+        remote = "https://github.com/wattli/envoy.git",
+        commit = "3ffdbc2e853901610a1ddc3a1988d7bb4f94f3b4", # Mar 21 2017
         build_file_content = BUILD,
     )
 
